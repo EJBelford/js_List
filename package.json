@@ -1,0 +1,15 @@
+{
+  "name": "js_list",
+  "version": "1.0.0",
+  "description": "code for Node List (nls)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Gene Belford",
+  "license": "ISC",
+  "bin": {
+    "nls": "index.js"
+  }
+}

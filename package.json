@@ -10,7 +10,7 @@
   "author": "Gene Belford",
   "license": "ISC",
   "bin": {
-    "nls": "index.js"
+    "nls": "./index.js"
   },
   "dependencies": {
     "ansi-styles": "^6.1.1",

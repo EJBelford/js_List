@@ -9,7 +9,7 @@
 //--*----|----*----|----*----|----*----|----*----|----*----|----*----|----*----/
 //
 // Section 24: Create Node Js Command Line Tools
-// Lesson: 331
+// Lesson: 336
 //
 //--*----1----*----2----*----3----*----4----*----5----*----6----*----7----*----8
 // NOTES: 
@@ -18,11 +18,15 @@
 // nodejs.org/api 
 // node --inspect-brk <prjctNm>
 //
+// clear && node index.js;
+// sudo npm link nls
+//
 //--*----|----*----|----*----|----*----|----*----|----*----|----*----|----*----/
 
-const fs    = require('fs');
-const util  = require('util');
 const chalk = require('chalk');
+const fs    = require('fs');
+const path  = require('path');
+const util  = require('util');
 
 const prjctNm = "List"
 const debug   = 0;    // 0: Off   1: On
@@ -30,7 +34,10 @@ const debug   = 0;    // 0: Off   1: On
 if (debug > 0) {
     console.log('DEBUG: Hi there from ' + prjctNm + '!');
     console.log('DEBUG: ' + prjctNm);
+    console.log('ARGV:  ' + process.argv);
 };
+
+const targetDir = process.argv[2] || process.cwd();
 
 // Option 2 - Method #2
 // const lstat = util.promisify(fs.lstat);
@@ -38,7 +45,7 @@ if (debug > 0) {
 // Option 2 - Method 3
 const { lstat } = fs.promises; 
 
-fs.readdir(process.cwd(), async (err, fileNames) => {
+fs.readdir(targetDir, async (err, fileNames) => {
     if (err) {
         if (debug > 0) {
             console.log('ERROR: ' + err);
@@ -102,7 +109,7 @@ fs.readdir(process.cwd(), async (err, fileNames) => {
     
     // Option 3
         const statPromises = fileNames.map(filename => {
-            return lstat(filename);
+            return lstat(path.join(targetDir, filename));
         });
 
         const allStats = await Promise.all(statPromises);
